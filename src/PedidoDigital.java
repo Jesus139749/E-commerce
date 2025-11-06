@@ -1,3 +1,2 @@
-public class PedidoDigital {
-
+public class PedidoDigital implements Pedido {
 }

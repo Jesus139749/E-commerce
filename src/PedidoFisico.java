@@ -1,3 +1,3 @@
-public class PedidoFisico {
+public class PedidoFisico implements Pedido {
 
 }
