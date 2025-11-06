@@ -1,4 +1,6 @@
-public class PedidoFisicoFactory extends PedidoFactory {
+package FactoryMethod;
+
+public class PedidoDigitalFactory extends PedidoFactory {
     @Override
     public Pedido instanciarPedido() {
         return new PedidoDigital();
