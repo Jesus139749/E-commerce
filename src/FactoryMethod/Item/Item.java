@@ -12,4 +12,17 @@ public class Item {
         this.quantidade = quantidade;
         this.tipo = tipo;
     }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "Item {\n" +
+                "  id: %d,\n" +
+                "  nome: '%s',\n" +
+                "  quantidade: %d,\n" +
+                "  tipo: %s\n" +
+                "}",
+                id, nome, quantidade, tipo
+        );
+    }
 }

@@ -3,6 +3,7 @@ package FactoryMethod;
 import FactoryMethod.Item.Item;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -25,16 +26,18 @@ public class PedidoFisico implements Pedido {
         return random.nextInt(1000);
     }
 
-    public LocalDateTime setarData(){
+    public LocalDateTime setarData() {
         return LocalDateTime.now();
     }
 
     public void adicionarItem(Item item) {
         this.itens.add(item);
+        // Adicionar lógica para atualizar valor
     }
 
     public void removerItem(int id) {
         this.itens.removeIf(item -> item.id == id);
+        // Adicionar lógica para atualizar valor
     }
 
     // Getters
@@ -53,5 +56,19 @@ public class PedidoFisico implements Pedido {
 
     public List<Item> getItens() {
         return itens;
+    }
+
+    @Override
+    public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        return String.format(
+                "PedidoDigital {\n" +
+                "  id: %d,\n" +
+                "  valor: R$ %.2f,\n" +
+                "  data: %s,\n" +
+                "  itens: %s\n" +
+                "}",
+                id, valor, data.format(formatter), itens
+        );
     }
 }

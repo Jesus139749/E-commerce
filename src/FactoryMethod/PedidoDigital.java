@@ -3,6 +3,7 @@ package FactoryMethod;
 import FactoryMethod.Item.Item;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -59,11 +60,15 @@ public class PedidoDigital implements Pedido {
 
     @Override
     public String toString() {
-        return "PedidoDigital{" +
-               "id=" + id +
-               ", valor=" + valor +
-               ", data=" + data +
-               ", itens=" + itens +
-               '}';
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        return String.format(
+                "PedidoDigital {\n" +
+                "  id: %d,\n" +
+                "  valor: R$ %.2f,\n" +
+                "  data: %s,\n" +
+                "  itens: %s\n" +
+                "}",
+                id, valor, data.format(formatter), itens
+        );
     }
 }
