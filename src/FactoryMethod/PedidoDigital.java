@@ -9,13 +9,19 @@ import java.util.Random;
 
 public class PedidoDigital implements Pedido {
 
-    public int id;
-    public double valor;
-    public LocalDateTime data;
-    public List<Item> itens = new ArrayList<>();
+    private int id;
+    private double valor;
+    private LocalDateTime data;
+    private List<Item> itens = new ArrayList<>();
+
+    public PedidoDigital() {
+        this.id = this.gerarId();
+        this.data = this.setarData();
+        this.valor = 0;
+    }
 
     public int gerarId() {
-        Random random =new Random();
+        Random random = new Random();
         return random.nextInt(1000);
     }
 
@@ -25,10 +31,39 @@ public class PedidoDigital implements Pedido {
 
     public void adicionarItem(Item item) {
         this.itens.add(item);
+        // Adicionar lógica para atualizar valor
     }
 
     public void removerItem(int id) {
         this.itens.removeIf(item -> item.id == id);
+        // Adicionar lógica para atualizar valor
     }
 
+    // Getters
+
+    public int getId() {
+        return id;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public LocalDateTime getData() {
+        return data;
+    }
+
+    public List<Item> getItens() {
+        return itens;
+    }
+
+    @Override
+    public String toString() {
+        return "PedidoDigital{" +
+               "id=" + id +
+               ", valor=" + valor +
+               ", data=" + data +
+               ", itens=" + itens +
+               '}';
+    }
 }
