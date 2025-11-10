@@ -1,21 +1,22 @@
+import carrinho.Carrinho;
 import item.Item;
 import item.Tipo;
 import pedido.Pedido;
-import pedido.PedidoDigitalFactory;
-import pedido.PedidoFactory;
-import pedido.PedidoFisicoFactory;
+
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
 
-        PedidoFactory factoryDigital = new PedidoDigitalFactory();
-        PedidoFactory factoryFisico = new PedidoFisicoFactory();
+        Carrinho carrinho = new Carrinho();
 
-        Pedido pedidoDigital = factoryDigital.instanciarPedido();
-        pedidoDigital.adicionarItem(new Item(1, "notebook", 1, 2000, Tipo.DIGITAL));
-        pedidoDigital.adicionarItem(new Item(2, "monitor", 1, 500, Tipo.DIGITAL));
-        pedidoDigital.removerItem(2);
+        carrinho.adicionarItem(new Item(1, "Curso do Pablo Marçal", 1, 2000, Tipo.DIGITAL));
+        carrinho.adicionarItem(new Item(2, "Curso de Dropshipping do Thiago Finch", 1, 2000, Tipo.DIGITAL));
+        carrinho.adicionarItem(new Item(3, "monitor", 1, 500, Tipo.FISICO));
 
-        System.out.println(pedidoDigital);
+        List<Pedido> pedidos = carrinho.gerarPedido();
+
+        System.out.println(pedidos);
+
     }
 }
