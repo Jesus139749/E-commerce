@@ -1,4 +1,4 @@
-package FactoryMethod;
+package pedido;
 
 public abstract class PedidoFactory {
 

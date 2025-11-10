@@ -1,4 +1,4 @@
-package FactoryMethod;
+package pedido;
 
 public class PedidoFisicoFactory extends PedidoFactory {
     @Override
