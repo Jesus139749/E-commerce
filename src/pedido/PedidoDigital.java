@@ -1,7 +1,6 @@
 package pedido;
 
 import item.Item;
-import item.Tipo;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -19,7 +18,6 @@ public class PedidoDigital implements Pedido {
     public PedidoDigital() {
         this.id = this.gerarId();
         this.data = this.setarData();
-        this.valor = 0;
     }
 
     public int gerarId() {
@@ -31,20 +29,9 @@ public class PedidoDigital implements Pedido {
         return LocalDateTime.now();
     }
 
-    public void adicionarItem(Item item) {
-
-        if (!item.tipo.equals(Tipo.DIGITAL)) {
-            throw new IllegalArgumentException("O tipo do pedido deve ser digital");
-        }
-
-        this.itens.add(item);
-        this.atualizarValor();
-
-    }
-
-    public void removerItem(int id) {
-        this.itens.removeIf(item -> item.id == id);
-        this.atualizarValor();
+    public void setarItens(List<Item> itens) {
+        this.itens = itens;
+        atualizarValor();
     }
 
     public void atualizarValor() {

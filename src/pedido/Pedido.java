@@ -3,10 +3,10 @@ package pedido;
 import item.Item;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public interface Pedido {
     int gerarId();
     LocalDateTime setarData();
-    void adicionarItem(Item item);
-    void removerItem(int id);
+    void setarItens(List<Item> itens);
 }

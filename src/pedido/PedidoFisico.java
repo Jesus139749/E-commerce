@@ -1,7 +1,6 @@
 package pedido;
 
 import item.Item;
-import item.Tipo;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -19,7 +18,6 @@ public class PedidoFisico implements Pedido {
     public PedidoFisico() {
         this.id = this.gerarId();
         this.data = this.setarData();
-        this.valor = 0;
     }
 
     public int gerarId() {
@@ -31,20 +29,9 @@ public class PedidoFisico implements Pedido {
         return LocalDateTime.now();
     }
 
-    public void adicionarItem(Item item) {
-
-        if (!item.tipo.equals(Tipo.FISICO)) {
-            throw new IllegalArgumentException("O tipo do pedido deve ser físico");
-        }
-
-        this.itens.add(item);
-        this.atualizarValor();
-
-    }
-
-    public void removerItem(int id) {
-        this.itens.removeIf(item -> item.id == id);
-        this.atualizarValor();
+    public void setarItens(List<Item> itens) {
+        this.itens = itens;
+        atualizarValor();
     }
 
     public void atualizarValor() {
@@ -77,7 +64,7 @@ public class PedidoFisico implements Pedido {
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         return String.format(
-                "PedidoDigital {\n" +
+                "PedidoFisico {\n" +
                 "  id: %d,\n" +
                 "  valor: R$ %.2f,\n" +
                 "  data: %s,\n" +
