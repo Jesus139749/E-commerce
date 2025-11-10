@@ -1,4 +1,4 @@
-package FactoryMethod.Item;
+package item;
 
 public enum Tipo {
     FISICO,
