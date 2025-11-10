@@ -1,6 +1,7 @@
-package FactoryMethod;
+package pedido;
 
-import FactoryMethod.Item.Item;
+import item.Item;
+import item.Tipo;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -8,14 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class PedidoFisico implements Pedido {
+public class PedidoDigital implements Pedido {
 
     private int id;
     private double valor;
     private LocalDateTime data;
     private List<Item> itens = new ArrayList<>();
 
-    public PedidoFisico() {
+    public PedidoDigital() {
         this.id = this.gerarId();
         this.data = this.setarData();
         this.valor = 0;
@@ -31,13 +32,27 @@ public class PedidoFisico implements Pedido {
     }
 
     public void adicionarItem(Item item) {
+
+        if (!item.tipo.equals(Tipo.DIGITAL)) {
+            throw new IllegalArgumentException("O tipo do pedido deve ser digital");
+        }
+
         this.itens.add(item);
-        // Adicionar lógica para atualizar valor
+        this.atualizarValor();
+
     }
 
     public void removerItem(int id) {
         this.itens.removeIf(item -> item.id == id);
-        // Adicionar lógica para atualizar valor
+        this.atualizarValor();
+    }
+
+    public void atualizarValor() {
+        double valorAtualizado = 0;
+        for (Item item : itens) {
+            valorAtualizado += item.valor;
+        }
+        this.valor = valorAtualizado;
     }
 
     // Getters
