@@ -1,0 +1,3 @@
+1;Curso do Pablo Marçal;2000;DIGITAL
+2;Curso de Dropshipping do Thiago Finch;2000;DIGITAL
+3;Monitor LG Ultrawide;500;FISICO

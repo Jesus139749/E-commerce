@@ -52,4 +52,8 @@ public class Carrinho {
         return pedidos;
 
     }
+
+    public List<Item> getItens() {
+        return itens;
+    }
 }
