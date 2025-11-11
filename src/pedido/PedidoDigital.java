@@ -65,7 +65,7 @@ public class PedidoDigital implements Pedido {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         return String.format(
                 "PedidoDigital {\n" +
-                "  id: %d,\n" +
+                "  id_Pedido: %d,\n" +
                 "  valor: R$ %.2f,\n" +
                 "  data: %s,\n" +
                 "  itens: %s\n" +
