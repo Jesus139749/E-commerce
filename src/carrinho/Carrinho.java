@@ -56,4 +56,8 @@ public class Carrinho {
     public List<Item> getItens() {
         return itens;
     }
+
+    public void limpar() {
+        this.itens.clear();
+    }
 }

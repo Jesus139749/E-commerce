@@ -1,7 +1,6 @@
 import carrinho.Carrinho;
 import item.Item;
 import item.Tipo;
-import pedido.Pedido;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,11 +27,10 @@ public class Main {
                 int id = Integer.parseInt(dados[0]);
                 String nome = dados[1];
                 double preco = Double.parseDouble(dados[2]);
-                Tipo tipo = Tipo.valueOf(dados[3].toUpperCase()); // converte texto para enum
+                Tipo tipo = Tipo.valueOf(dados[3]);
 
                 catalogoItens.add(new Item(id, nome, preco, tipo));
             }
-            System.out.println("Catálogo carregado com sucesso!");
         } catch (Exception e) {
             System.out.println("Erro ao carregar catálogo: " + e.getMessage());
         }
@@ -140,7 +138,6 @@ public class Main {
             return;
         }
 
-        // Busca o item no catálogo
         Item itemSelecionado = null;
         for (Item item : catalogoItens) {
             if (item.id == id) {
@@ -150,17 +147,15 @@ public class Main {
         }
 
         if (itemSelecionado == null) {
-            System.out.println("❌ Produto não encontrado!");
+            System.out.println("Produto não encontrado");
             return;
         }
 
         itemSelecionado.quantidade = 1;
         carrinho.adicionarItem(itemSelecionado);
-        carrinho.atualizarValor();
 
-        System.out.println("✅ Produto adicionado ao carrinho com sucesso!");
+        System.out.println("Produto adicionado ao carrinho com sucesso");
     }
-
 
     private static void exibirCarrinho() {
         System.out.println("\n");
@@ -195,7 +190,24 @@ public class Main {
     }
 
     private static void removerProdutoDoCarrinho() {
-        System.out.println("Remover do carrinho");
+
+        System.out.println("\n");
+        System.out.println("=".repeat(50));
+        System.out.println("REMOVER PRODUTO DO CARRINHO");
+        System.out.println("=".repeat(50));
+
+        exibirCarrinho();
+
+        System.out.print("\nDigite o ID do produto que deseja remover (0 para voltar): ");
+        int id = Integer.parseInt(scanner.nextLine());
+
+        if (id == 0) {
+            return;
+        }
+
+        carrinho.removerItem(id);
+        System.out.println("Produto removido do carrinho com sucesso");
+
     }
 
     private static void fazerPedido() {
@@ -203,7 +215,22 @@ public class Main {
     }
 
     private static void limparCarrinho() {
-        System.out.println("Limpar carrinho");
+        System.out.println("\n");
+        System.out.println("=".repeat(50));
+        System.out.println("LIMPAR CARRINHO");
+        System.out.println("=".repeat(50));
+
+        System.out.println("Deseja limpar o carrinho? S/N");
+
+        char escolha = scanner.next().toUpperCase().charAt(0);
+
+        if (escolha == 'S') {
+            carrinho.limpar();
+        }
+        else {
+            System.out.println("Operação cancelada");
+        }
+
     }
 
 
