@@ -1,6 +1,9 @@
 import carrinho.Carrinho;
 import item.Item;
 import item.Tipo;
+import pagamento.InternacionalPagamentoFactory;
+import pagamento.PagamentosFactory;
+import pagamento.Pix;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +16,11 @@ public class Main {
     private static List<Item> catalogoItens = new ArrayList<>();
 
     public static void main(String[] args) {
+        PagamentosFactory internacionalFactory= new InternacionalPagamentoFactory();
+        Pix internacionalPix= internacionalFactory.createPix();
+
+        internacionalPix.pagar(200.0);
+
         inicializarCatalogo();
         exibirMenuPrincipal();
     }
@@ -230,6 +238,7 @@ public class Main {
         else {
             System.out.println("Operação cancelada");
         }
+
 
     }
 
