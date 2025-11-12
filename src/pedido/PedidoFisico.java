@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class PedidoFisico implements Pedido {
+public class PedidoFisico implements PedidoInterface {
 
     private int id;
     private double valor;

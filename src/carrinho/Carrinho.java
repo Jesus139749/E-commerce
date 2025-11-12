@@ -30,21 +30,21 @@ public class Carrinho {
         this.valor = valorAtualizado;
     }
 
-    public List<Pedido> gerarPedido() {
+    public List<PedidoInterface> gerarPedido() {
 
         List<Item> itensDigitais = itens.stream().filter(item -> item.tipo.equals(Tipo.DIGITAL)).toList();
         List<Item> itensFisicos = itens.stream().filter(item -> item.tipo.equals(Tipo.FISICO)).toList();
 
-        List<Pedido> pedidos = new ArrayList<>();
+        List<PedidoInterface> pedidos = new ArrayList<>();
 
         if (!itensDigitais.isEmpty()) {
-            Pedido pedidoDigital = new PedidoDigitalFactory().instanciarPedido();
+            PedidoInterface pedidoDigital = new PedidoDigitalFactory().instanciarPedido();
             pedidoDigital.setarItens(itensDigitais);
             pedidos.add(pedidoDigital);
         }
 
         if (!itensFisicos.isEmpty()) {
-            Pedido pedidoFisico = new PedidoFisicoFactory().instanciarPedido();
+            PedidoInterface pedidoFisico = new PedidoFisicoFactory().instanciarPedido();
             pedidoFisico.setarItens(itensFisicos);
             pedidos.add(pedidoFisico);
         }

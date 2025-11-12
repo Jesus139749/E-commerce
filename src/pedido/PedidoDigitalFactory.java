@@ -2,7 +2,7 @@ package pedido;
 
 public class PedidoDigitalFactory extends PedidoFactory {
     @Override
-    public Pedido instanciarPedido() {
+    public PedidoInterface instanciarPedido() {
         return new PedidoDigital();
     }
 }

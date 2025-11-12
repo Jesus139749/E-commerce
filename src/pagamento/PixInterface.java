@@ -1,5 +1,5 @@
 package pagamento;
 
-public interface Cartao {
+public interface PixInterface {
     void pagar(double valor);
 }

@@ -1,9 +1,9 @@
 package pagamento;
 
-public class PixInternacional implements Pix{
+public class PixInternacional implements PixInterface {
     @Override
     public void  pagar(double valor){
-        System.out.println("Pagando Pix Internacional....");
+        System.out.println("Pagando PixInterface Internacional....");
     }
 
 }

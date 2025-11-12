@@ -1,19 +1,19 @@
 package pagamento;
 
-public class InternacionalPagamentoFactory implements PagamentosFactory{
+public class InternacionalPagamentoFactory implements PagamentosFactoryInterface {
 
     @Override
-    public Pix createPix() {
+    public PixInterface createPix() {
         return new PixInternacional();
     }
 
     @Override
-    public Cartao createCartao() {
+    public CartaoInterface createCartao() {
         return new CartaoInternacional();
     }
 
     @Override
-    public Boleto createBoleto() {
+    public BoletoInterface createBoleto() {
         return new BoletoInternacional();
     }
 }

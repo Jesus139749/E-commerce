@@ -2,8 +2,8 @@ import carrinho.Carrinho;
 import item.Item;
 import item.Tipo;
 import pagamento.InternacionalPagamentoFactory;
-import pagamento.PagamentosFactory;
-import pagamento.Pix;
+import pagamento.PagamentosFactoryInterface;
+import pagamento.PixInterface;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,8 +19,8 @@ public class Main {
     private static List<Item> catalogoItens = new ArrayList<>();
 
     public static void main(String[] args) {
-        PagamentosFactory internacionalFactory= new InternacionalPagamentoFactory();
-        Pix internacionalPix= internacionalFactory.createPix();
+        PagamentosFactoryInterface internacionalFactory= new InternacionalPagamentoFactory();
+        PixInterface internacionalPix= internacionalFactory.createPix();
 
         internacionalPix.pagar(200.0);
 
