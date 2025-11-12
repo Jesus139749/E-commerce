@@ -5,6 +5,9 @@ import pagamento.InternacionalPagamentoFactory;
 import pagamento.PagamentosFactory;
 import pagamento.Pix;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -27,7 +30,8 @@ public class Main {
 
     private static void inicializarCatalogo() {
         try {
-            List<String> linhas = java.nio.file.Files.readAllLines(java.nio.file.Paths.get("C:\\Users\\alyss\\OneDrive\\Desktop\\Faculdade\\Programação 3\\E-commerce\\src\\arquivos\\catalogo.txt"));
+            Path caminho = Paths.get("C:\\Users\\alyss\\OneDrive\\Desktop\\Faculdade\\Programação 3\\E-commerce\\src\\arquivos\\catalogo.txt");
+            List<String> linhas = Files.readAllLines(caminho);
 
             for (String linha : linhas) {
                 String[] dados = linha.split(";");
