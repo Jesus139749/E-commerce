@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class PedidoDigital implements PedidoInterface {
 
@@ -21,8 +20,7 @@ public class PedidoDigital implements PedidoInterface {
     }
 
     public int gerarId() {
-        Random random = new Random();
-        return random.nextInt(1000);
+        return GeradorIdPedido.gerarIdUnico();
     }
 
     public LocalDateTime setarData() {

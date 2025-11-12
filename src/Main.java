@@ -4,6 +4,7 @@ import item.Tipo;
 import pagamento.InternacionalPagamentoFactory;
 import pagamento.PagamentosFactoryInterface;
 import pagamento.PixInterface;
+import pedido.PedidoInterface;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -224,6 +225,8 @@ public class Main {
 
     private static void fazerPedido() {
         System.out.println("Fazer pedido");
+        List<PedidoInterface> pedidos = carrinho.gerarPedido();
+        System.out.println(pedidos);
     }
 
     private static void limparCarrinho() {

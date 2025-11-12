@@ -21,8 +21,7 @@ public class PedidoFisico implements PedidoInterface {
     }
 
     public int gerarId() {
-        Random random = new Random();
-        return random.nextInt(1000);
+        return GeradorIdPedido.gerarIdUnico();
     }
 
     public LocalDateTime setarData() {
