@@ -247,7 +247,7 @@ public class Main {
         char escolha = scanner.next().toUpperCase().charAt(0);
 
         if (escolha == 'S') {
-            System.out.println("Vamos finalizar");
+            Carrinho.finalizarPedidos(pedidos);
         }
         else {
             System.out.println("Operação cancelada");

@@ -53,6 +53,12 @@ public class Carrinho {
 
     }
 
+    public static void finalizarPedidos(List<PedidoInterface> pedidos) {
+        pedidos.forEach(pedido -> {
+            //
+        });
+    }
+
     public List<Item> getItens() {
         return itens;
     }
