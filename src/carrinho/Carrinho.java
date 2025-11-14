@@ -30,7 +30,7 @@ public class Carrinho {
         this.valor = valorAtualizado;
     }
 
-    public List<PedidoInterface> gerarPedido() {
+    public List<PedidoInterface> gerarPedidos() {
 
         List<Item> itensDigitais = itens.stream().filter(item -> item.tipo.equals(Tipo.DIGITAL)).toList();
         List<Item> itensFisicos = itens.stream().filter(item -> item.tipo.equals(Tipo.FISICO)).toList();
@@ -55,6 +55,10 @@ public class Carrinho {
 
     public List<Item> getItens() {
         return itens;
+    }
+
+    public double getValor() {
+        return valor;
     }
 
     public void limpar() {

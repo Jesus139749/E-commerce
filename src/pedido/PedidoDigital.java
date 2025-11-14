@@ -50,8 +50,8 @@ public class PedidoDigital implements PedidoInterface {
         return valor;
     }
 
-    public LocalDateTime getData() {
-        return data;
+    public String getDataFormatada() {
+        return data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
     }
 
     public List<Item> getItens() {
@@ -60,7 +60,6 @@ public class PedidoDigital implements PedidoInterface {
 
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         return String.format(
                 "PedidoDigital {\n" +
                 "  id_Pedido: %d,\n" +
@@ -68,7 +67,7 @@ public class PedidoDigital implements PedidoInterface {
                 "  data: %s,\n" +
                 "  itens: %s\n" +
                 "}",
-                id, valor, data.format(formatter), itens
+                id, valor, getDataFormatada(), itens
         );
     }
 }

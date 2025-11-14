@@ -4,6 +4,7 @@ import item.Tipo;
 import pagamento.InternacionalPagamentoFactory;
 import pagamento.PagamentosFactoryInterface;
 import pagamento.PixInterface;
+import pedido.PedidoDigital;
 import pedido.PedidoInterface;
 
 import java.nio.file.Files;
@@ -185,8 +186,6 @@ public class Main {
                 "ID", "Produto", "Qtd", "Preço (R$)", "Tipo");
         System.out.println("-".repeat(70));
 
-        double total = 0;
-
         for (Item item : carrinho.getItens()) {
             System.out.printf("%-5d %-35s %-10d %-12.2f %-10s%n",
                     item.id,
@@ -194,12 +193,10 @@ public class Main {
                     item.quantidade,
                     item.valor,
                     item.tipo);
-
-            total += item.valor * item.quantidade;
         }
 
         System.out.println("-".repeat(70));
-        System.out.printf("Valor total: R$ %.2f%n", total);
+        System.out.printf("Valor total: R$ %.2f%n", carrinho.getValor());
     }
 
     private static void removerProdutoDoCarrinho() {
@@ -224,9 +221,38 @@ public class Main {
     }
 
     private static void fazerPedido() {
-        System.out.println("Fazer pedido");
-        List<PedidoInterface> pedidos = carrinho.gerarPedido();
-        System.out.println(pedidos);
+        System.out.println("\n");
+        System.out.println("=".repeat(50));
+        System.out.println("FAZER PEDIDO");
+        System.out.println("=".repeat(50));
+
+        List<PedidoInterface> pedidos = carrinho.gerarPedidos();
+
+        pedidos.forEach(pedido -> {
+
+            String tipoPedido = pedido instanceof PedidoDigital ? "Digital" : "Físico";
+            System.out.printf("Detalhes do pedido %s #%d: %n", tipoPedido, pedido.getId());
+            System.out.printf("Valor: R$ %.2f %nData: %s %n", pedido.getValor(), pedido.getDataFormatada());
+
+            pedido.getItens().forEach(item -> {
+                System.out.printf("Item: %s %nTipo: %s %n", item.nome, item.tipo);
+            });
+
+            System.out.printf("%n");
+        });
+
+        System.out.printf("Total: R$ %.2f %nQtd. itens: %d %n", carrinho.getValor(), carrinho.getItens().size());
+        System.out.println("Deseja finalizar o pedido? S/N: ");
+
+        char escolha = scanner.next().toUpperCase().charAt(0);
+
+        if (escolha == 'S') {
+            System.out.println("Vamos finalizar");
+        }
+        else {
+            System.out.println("Operação cancelada");
+        }
+
     }
 
     private static void limparCarrinho() {
