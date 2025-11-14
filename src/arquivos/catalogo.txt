@@ -1,3 +1,15 @@
 1;Curso do Pablo Marçal;2000;DIGITAL
 2;Curso de Dropshipping do Thiago Finch;2000;DIGITAL
 3;Monitor LG Ultrawide;500;FISICO
+4;Mouse Gamer Redragon Cobra;120;FISICO
+5;Teclado Mecânico HyperX Alloy;350;FISICO
+6;Cadeira Gamer Husky Invictus;1100;FISICO
+7;Curso de Programação Java Completo;150;DIGITAL
+8;Curso de Análise de Dados com Python;180;DIGITAL
+9;Curso de Marketing Digital Avançado;250;DIGITAL
+10;Headset Logitech G432;280;FISICO
+11;Webcam Logitech C920;400;FISICO
+12;Curso de Edição de Vídeo no Premiere;120;DIGITAL
+13;Placa de Vídeo RTX 4060;2300;FISICO
+14;Suporte Articulado para Monitor;90;FISICO
+15;Curso de Inteligência Artificial para Iniciantes;200;DIGITAL
