@@ -1,9 +1,6 @@
 import carrinho.Carrinho;
 import item.Item;
 import item.Tipo;
-import pagamento.InternacionalPagamentoFactory;
-import pagamento.PagamentosFactoryInterface;
-import pagamento.PixInterface;
 import pedido.PedidoDigital;
 import pedido.PedidoInterface;
 
@@ -21,11 +18,6 @@ public class Main {
     private static List<Item> catalogoItens = new ArrayList<>();
 
     public static void main(String[] args) {
-        PagamentosFactoryInterface internacionalFactory= new InternacionalPagamentoFactory();
-        PixInterface internacionalPix= internacionalFactory.createPix();
-
-        internacionalPix.pagar(200.0);
-
         inicializarCatalogo();
         exibirMenuPrincipal();
     }
