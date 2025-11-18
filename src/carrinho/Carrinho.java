@@ -1,5 +1,8 @@
 package carrinho;
 
+import frete.CalculadoraFrete;
+import frete.FreteInternacional;
+import frete.FreteNormal;
 import item.Item;
 import item.Tipo;
 import pagamento.*;
@@ -10,6 +13,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Carrinho {
+
+    private static Scanner sc = new Scanner(System.in);
+
+    private static CalculadoraFrete calculadoraFrete = new CalculadoraFrete();
+    private static PagamentosFactoryInterface pagamentosFactory;
 
     private List<Item> itens = new ArrayList<>();
     private double valor;
@@ -57,20 +65,50 @@ public class Carrinho {
 
     public static void finalizarPedidos(List<PedidoInterface> pedidos) {
 
-        // Calcular fretes
+        System.out.println("Escolha o país de entrega: ");
+        System.out.println("1 - Brasil");
+        System.out.println("2 - Outro");
 
-        // Calcular descontos
+        int escolhaPais = sc.nextInt();
+        double distancia = 0;
 
-        // Processar pagamentos
-        pedidos.forEach(pedido -> {
-            processarPagamento(pedido, new NacionalPagamentoFactory());
-        });
+        if (escolhaPais == 1) {
+            calculadoraFrete.setStrategy(new FreteNormal());
+            distancia = 50;
+            pagamentosFactory = new NacionalPagamentoFactory();
+        }
+        else if (escolhaPais == 2) {
+            calculadoraFrete.setStrategy(new FreteInternacional());
+            distancia = 150;
+            pagamentosFactory = new InternacionalPagamentoFactory();
+        }
+
+        for (PedidoInterface pedido : pedidos) {
+
+            double valorPedido = pedido.getValor();
+
+            // Cálculo de fretes
+            double frete = calcularFrete(pedido, distancia);
+            valorPedido += frete;
+
+            // Cálculo de descontos
+
+            // Processar pagamentos
+            processarPagamento(valorPedido);
+        }
 
     }
 
-    public static void processarPagamento(PedidoInterface pedido, PagamentosFactoryInterface pagamentosFactory) {
+    public static double calcularFrete(PedidoInterface pedido, double distancia) {
 
-        Scanner sc = new Scanner(System.in);
+        if (pedido instanceof PedidoDigital) {
+            return 0;
+        }
+
+        return calculadoraFrete.calcular(pedido.getValor(), distancia);
+    }
+
+    public static void processarPagamento(double valor) {
 
         System.out.println("=".repeat(50));
         System.out.println("CHECKOUT");
@@ -85,15 +123,15 @@ public class Carrinho {
         switch (escolhaPagamento) {
             case 1:
                 BoletoInterface boleto = pagamentosFactory.createBoleto();
-                boleto.pagar(pedido.getValor());
+                boleto.pagar(valor);
                 break;
             case 2:
                 PixInterface pix = pagamentosFactory.createPix();
-                pix.pagar(pedido.getValor());
+                pix.pagar(valor);
                 break;
             case 3:
                 CartaoInterface cartao = pagamentosFactory.createCartao();
-                cartao.pagar(pedido.getValor());
+                cartao.pagar(valor);
                 break;
         }
 

@@ -240,6 +240,7 @@ public class Main {
 
         if (escolha == 'S') {
             Carrinho.finalizarPedidos(pedidos);
+            carrinho.limpar();
         }
         else {
             System.out.println("Operação cancelada");
