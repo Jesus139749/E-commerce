@@ -92,6 +92,39 @@ public class Carrinho {
             valorPedido += frete;
 
             // Cálculo de descontos
+            System.out.println("Escolha a opção de Desconto: ");
+            System.out.println("1- Pix(Desconto de 10%) ");
+            System.out.println("2- Cartão(Desconto de 5%) ");
+            System.out.println("3- Boleto(Sem Desconto) ");
+
+            int opcaoDesconto = sc.nextInt();
+
+            descontos.DescontoInterface descontoStrategy;
+
+            switch (opcaoDesconto) {
+                case 1:
+                    descontoStrategy = new descontos.DescontoPix();
+                    System.out.println("Pagamento com Pix (Desconto de 10%)");
+                    break;
+                case 2:
+                    descontoStrategy = new descontos.DescontoCartao();
+                    System.out.println("Pagamento com Cartão (Desconto de 5%) ");
+                    break;
+                case 3:
+                    descontoStrategy = new descontos.DescontoBoleto();
+                    System.out.println("Pagamento com Boleto (Sem Desconto)");
+                    break;
+
+                default:
+                    descontoStrategy = new descontos.DescontoBoleto();
+                    System.out.println("  Opção inválida, sem desconto");
+
+            }
+            double desconto = descontoStrategy.calcularDesconto(valorPedido);
+            valorPedido -= desconto;
+
+            System.out.printf("Desconto aplicado: R$ %.2f%n", desconto);
+            System.out.printf("Valor final: R$ %.2f%n", valorPedido);
 
             // Processar pagamentos
             processarPagamento(valorPedido);

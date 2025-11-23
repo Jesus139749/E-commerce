@@ -24,7 +24,7 @@ public class Main {
 
     private static void inicializarCatalogo() {
         try {
-            Path caminho = Paths.get("C:\\Users\\alyss\\OneDrive\\Desktop\\Faculdade\\Programação 3\\E-commerce\\src\\arquivos\\catalogo.txt");
+            Path caminho = Paths.get("E:\\ECLIPSE\\Projetos Java\\E-commerce\\src\\arquivos\\catalogo.txt");
             List<String> linhas = Files.readAllLines(caminho);
 
             for (String linha : linhas) {
