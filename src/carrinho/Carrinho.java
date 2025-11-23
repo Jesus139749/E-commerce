@@ -1,5 +1,6 @@
 package carrinho;
 
+import descontos.*;
 import frete.CalculadoraFrete;
 import frete.FreteInternacional;
 import frete.FreteNormal;
@@ -17,6 +18,7 @@ public class Carrinho {
     private static Scanner sc = new Scanner(System.in);
 
     private static CalculadoraFrete calculadoraFrete = new CalculadoraFrete();
+    private static CalculadoraDesconto calculadoraDesconto = new CalculadoraDesconto();
     private static PagamentosFactoryInterface pagamentosFactory;
 
     private List<Item> itens = new ArrayList<>();
@@ -91,41 +93,6 @@ public class Carrinho {
             double frete = calcularFrete(pedido, distancia);
             valorPedido += frete;
 
-            // Cálculo de descontos
-            System.out.println("Escolha a opção de Desconto: ");
-            System.out.println("1- Pix(Desconto de 10%) ");
-            System.out.println("2- Cartão(Desconto de 5%) ");
-            System.out.println("3- Boleto(Sem Desconto) ");
-
-            int opcaoDesconto = sc.nextInt();
-
-            descontos.DescontoInterface descontoStrategy;
-
-            switch (opcaoDesconto) {
-                case 1:
-                    descontoStrategy = new descontos.DescontoPix();
-                    System.out.println("Pagamento com Pix (Desconto de 10%)");
-                    break;
-                case 2:
-                    descontoStrategy = new descontos.DescontoCartao();
-                    System.out.println("Pagamento com Cartão (Desconto de 5%) ");
-                    break;
-                case 3:
-                    descontoStrategy = new descontos.DescontoBoleto();
-                    System.out.println("Pagamento com Boleto (Sem Desconto)");
-                    break;
-
-                default:
-                    descontoStrategy = new descontos.DescontoBoleto();
-                    System.out.println("  Opção inválida, sem desconto");
-
-            }
-            double desconto = descontoStrategy.calcularDesconto(valorPedido);
-            valorPedido -= desconto;
-
-            System.out.printf("Desconto aplicado: R$ %.2f%n", desconto);
-            System.out.printf("Valor final: R$ %.2f%n", valorPedido);
-
             // Processar pagamentos
             processarPagamento(valorPedido);
         }
@@ -147,27 +114,38 @@ public class Carrinho {
         System.out.println("CHECKOUT");
         System.out.println("=".repeat(50));
 
-        System.out.println("1 - Boleto");
-        System.out.println("2 - PIX");
-        System.out.println("3 - Cartão");
+        System.out.println("1 - Boleto (sem desconto)");
+        System.out.println("2 - PIX (desconto de 10%)");
+        System.out.println("3 - Cartão (desconto de 5%)");
         System.out.println("Escolha o método de pagamento: ");
 
         int escolhaPagamento = sc.nextInt();
         switch (escolhaPagamento) {
             case 1:
+                valor -= calcularDesconto(new DescontoBoleto(), valor);
                 BoletoInterface boleto = pagamentosFactory.createBoleto();
                 boleto.pagar(valor);
                 break;
             case 2:
+                valor -= calcularDesconto(new DescontoPix(), valor);
                 PixInterface pix = pagamentosFactory.createPix();
                 pix.pagar(valor);
                 break;
             case 3:
+                valor -= calcularDesconto(new DescontoCartao(), valor);
                 CartaoInterface cartao = pagamentosFactory.createCartao();
                 cartao.pagar(valor);
                 break;
         }
 
+    }
+
+    public static double calcularDesconto(DescontoInterface strategy, double valor) {
+        calculadoraDesconto.setStrategy(strategy);
+        double desconto = calculadoraDesconto.calcularDesconto(valor);
+        System.out.printf("Desconto aplicado: R$ %.2f%n", desconto);
+        System.out.printf("Valor final: R$ %.2f%n", valor - desconto);
+        return desconto;
     }
 
     public List<Item> getItens() {
