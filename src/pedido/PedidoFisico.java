@@ -59,16 +59,5 @@ public class PedidoFisico implements PedidoInterface {
         return itens;
     }
 
-    @Override
-    public String toString() {
-        return String.format(
-                "PedidoFisico {\n" +
-                "  id_Pedido: %d,\n" +
-                "  valor: R$ %.2f,\n" +
-                "  data: %s,\n" +
-                "  itens: %s\n" +
-                "}",
-                id, valor, getDataFormatada(), itens
-        );
-    }
+
 }
