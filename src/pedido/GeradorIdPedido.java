@@ -18,12 +18,4 @@ public class GeradorIdPedido {
         idsGerados.add(id);
         return id;
     }
-
-    public static void limparIds() {
-        idsGerados.clear();
-    }
-
-    public static Set<Integer> getIdsGerados() {
-        return idsGerados;
-    }
 }
